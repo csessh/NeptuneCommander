@@ -11,10 +11,7 @@ def main(attacker_tech: int, attacker_size: int, defender_tech: int, defender_si
     defender = Combatant(defender_tech, defender_size, is_defender=True)
 
     battle = Battle(attacker, defender)
-    attacker, defender = battle.resolve(verbose=verbose)
-
-    print('Attacker: ', attacker)
-    print('Defender: ', defender)
+    battle.resolve()
 
     return SUCCESS_RETURN_CODE
 
