@@ -6,16 +6,14 @@ from lib.combatant import Combatant
 SUCCESS_RETURN_CODE = 0
 
 
-def main(attacker_tech: int, attacker_size: int, defender_tech: int, defender_size: int, verbose: bool=False) -> int:
+def main(attacker_tech: int, attacker_size: int, defender_tech: int, verbose: bool=False) -> int:
     attacker = Combatant(attacker_tech, attacker_size)
-    defender = Combatant(defender_tech, defender_size, is_defender=True)
-
+    defender = Combatant(defender_tech, 0, is_defender=True)
     battle = Battle(attacker, defender)
-    attacker, defender = battle.resolve(verbose=verbose)
+    defender.size = battle.ships_to_defend()
 
-    print('Attacker: ', attacker)
-    print('Defender: ', defender)
-
+    print(f'Required number of ships to defend against a fleet of {attacker.size} at level {attacker.tech} is {defender.size}')
+    battle.resolve(verbose=True)
     return SUCCESS_RETURN_CODE
 
 
@@ -23,12 +21,10 @@ if __name__ == '__main__':
     import sys
     import argparse
 
-    parser = argparse.ArgumentParser('Combat calculator')
+    parser = argparse.ArgumentParser('Return the minimum number of ships needed to successfully defend against an attack')
     parser.add_argument('attacker_size', type=int, help='Attacker fleet size')
     parser.add_argument('attacker_tech', type=int, help='Attacker weapon technology level')
-    parser.add_argument('defender_size', type=int, help='Defender fleet size')
     parser.add_argument('defender_tech', type=int, help='Defender weapon technology level')
-    parser.add_argument('-v', action='store_true', help='Display turn by turn action')
 
     args = parser.parse_args()
 
@@ -36,8 +32,6 @@ if __name__ == '__main__':
         main(
             attacker_size=args.attacker_size,
             attacker_tech=args.attacker_tech,
-            defender_size=args.defender_size,
-            defender_tech=args.defender_tech,
-            verbose=args.v
+            defender_tech=args.defender_tech
         )
     )

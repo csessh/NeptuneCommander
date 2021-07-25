@@ -1,5 +1,5 @@
 from typing import Tuple
-from combatant import Combatant
+from lib.combatant import Combatant
 
 
 class Battle:
@@ -31,3 +31,7 @@ class Battle:
                 self._defender.size -= (turns_for_attacker * self._attacker.tech)
         return self._attacker, self._defender
 
+    def ships_to_defend(self) -> int:
+        attacker_turns = self._attacker.size // self._defender.tech
+        required_ships = attacker_turns + 1 * self._attacker.tech
+        return required_ships
