@@ -13,7 +13,7 @@ def main(attacker_tech: int, attacker_size: int, defender_tech: int, verbose: bo
     defender.size = battle.ships_to_defend()
 
     print(f'Required number of ships to defend against a fleet of {attacker.size} at level {attacker.tech} is {defender.size}')
-    battle.resolve(verbose=True)
+    battle.resolve()
     return SUCCESS_RETURN_CODE
 
 
