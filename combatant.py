@@ -51,5 +51,5 @@ class Combatant:
 
     def __str__(self) -> str:
         if self._is_defender:
-            return f'Fleet of {self._fleet_size} with level {self._weapon_tech} weapon technology with defender bonus'
-        return f'Fleet of {self._fleet_size} with level {self._weapon_tech} weapon technology'
+            return f'Fleet of {self._fleet_size} ships with level {self._weapon_tech} weapon technology with defender bonus'
+        return f'Fleet of {self._fleet_size} ships with level {self._weapon_tech} weapon technology'
